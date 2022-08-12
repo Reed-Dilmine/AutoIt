@@ -1,0 +1,42 @@
+[ISNAUTOITSTUDIO]
+name=Graphique Perturbo b01
+mainfile=Graphique_Perturbo_b01.au3
+author=dlemen
+time=11992323
+date=05.07.2016
+comment=Affichage des données perturbo
+studioversion=1.02
+version=0.1
+projectopened=4
+lastusedfiles=\Graphique_Perturbo_b01.au3|\Bouton image text.au3|\Temp\Tempscript_1.au3|\Images\Fond_02.jpg|\Forms\Fen_Visu_Perturbo.isf|\Images\1357-cybermdee-hpmute.png|\Images\2008-08-09_204301.png|\Images\Chn_Steel_Up.jpg|\Images\Cmd_3x2.gif||
+temp_script_path=%projectdir%\Temp
+temp_script_name=Tempscript_%count%
+temp_script_delete_mode=2
+compile_finished_project_dir=%projectname%
+use_changelog_manager=false
+changelog_use_author_from_project=false
+compile_exeicon=%isnstudiodir%\autoitstudioicon.ico
+compile_exename=Graphique_Perturbo_b01
+compile_mode=2
+compile_delete_empty_folders=true
+compile_source=false
+compile_x64=false
+compile_openaftercompile=true
+compile_runaftercompile=false
+compile_useupx=true
+compile_console=false
+compile_compression=normal
+additional_api_folders=
+additional_properties_folders=
+ruleslot1_projecttreecontext=1
+opened=
+opened_tabs=%projectdir%\Graphique_Perturbo_b01.au3|
+lastopendate=12.07.2016 18:36
+[#ruletrigger_ruleslot1#]
+#isnrule#201607051841129=
+[#isnrule#201607051841129]
+actions=insertautoitcode[052034260]|
+code[052034260]=Func[BREAK][BREAK]EndFunc
+status=active
+name=Ins_Func
+triggers=#ruletrigger_ruleslot1#|

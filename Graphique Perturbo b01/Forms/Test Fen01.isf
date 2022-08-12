@@ -1,0 +1,105 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+
+$Test_Fen01 = GUICreate("Test Fen01",444,490,-1,-1,-1,-1)
+GUISetBkColor(0x000000,$Test_Fen01)
+GUICtrlCreateInput("Mon texte",20,20,150,20,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetFont(-1,12,400,0,"MS Sans Serif")
+GUICtrlCreateEdit("Mon texte",20,60,200,150,-1,-1)
+GUICtrlSetFont(-1,12,400,0,"MS Sans Serif")
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=Test Fen01
+breite=444
+hoehe=490
+style=-1
+exstyle=-1
+bgcolour=0x000000
+bgimage=none
+handle=$Test_Fen01
+parent=
+code=
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_code_in_function=false
+gui_code_in_function_name=
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+defaultfont=MS Sans Serif
+defaultfontsize=8
+[0x000A2088]
+type=input
+handle=418
+locked=0
+resize=
+x=20
+y=20
+width=150
+height=20
+func=
+font=MS Sans Serif
+fontsize=12
+fontstyle=400
+fontattribute=0
+tooltip=
+bgimage=
+textcolour=0x000000
+id=
+text=Mon texte
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+bgcolour=
+code=
+order=0
+[0x0007208E]
+type=edit
+handle=419
+locked=0
+resize=
+x=20
+y=60
+width=200
+height=150
+func=
+font=MS Sans Serif
+fontsize=12
+fontstyle=400
+fontattribute=0
+tooltip=
+bgimage=
+textcolour=0x000000
+id=
+text=Mon texte
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+bgcolour=
+code=
+order=2
+tabpage=-1
+#ce

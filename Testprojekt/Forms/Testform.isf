@@ -1,0 +1,912 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <UpDownConstants.au3>
+#include <SliderConstants.au3>
+#include <GuiSlider.au3>
+#include <GuiTab.au3>
+#Include <GuiIPAddress.au3>
+#include <TreeViewConstants.au3>
+#include <DateTimeConstants.au3>
+#include <EditConstants.au3>
+#include <ProgressConstants.au3>
+#include <ListBoxConstants.au3>
+#include <ComboConstants.au3>
+#Include <GuiMenu.au3>
+#include <WinAPIShellEx.au3>
+
+$Testform = GUICreate("Form",796,527,-1,-1,-1,-1)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Exit", $Testform)
+$MenuItem626 = GUICtrlCreateMenu("File")
+$MenuItem157 = GUICtrlCreateMenuItem("Nothing to see here...",$MenuItem626,-1,0)
+$MenuItem615 = GUICtrlCreateMenuItem("Exit",$MenuItem626,-1,0)
+GUICtrlSetOnEvent(-1, "_Exit")
+$MenuItem84 = GUICtrlCreateMenu("Help")
+$MenuItem227 = GUICtrlCreateMenuItem("Just an example",$MenuItem84,-1,0)
+$tab = GUICtrlCreatetab(14,56,372,219,-1,-1)
+GuiCtrlSetState(-1,2048)
+GUICtrlSetState(-1,80)
+GUICtrlCreateTabItem("Page 1")
+GUICtrlCreateTabItem("Page 2")
+GUICtrlCreateTabItem("Testpage")
+GUICtrlCreateTabItem("")
+_GUICtrlTab_SetCurFocus($tab,-1)
+GUICtrlCreateGroup("Centered Title",400,80,388,198,$BS_CENTER,-1)
+$label779 = GUICtrlCreateLabel("ISN Autoit Studio TESTFORM",20,10,426,34,-1,-1)
+GUICtrlSetFont(-1,18,700,6,"MS Sans Serif")
+GUICtrlSetColor(-1,"0xFCB92E")
+GUICtrlSetBkColor(-1,"0xF0F0F0")
+GUISwitch($Testform,_GUICtrlTab_SetCurFocus($tab,0)&GUICtrlRead ($tab, 1))
+GUICtrlCreateButton("Button 1",40,100,100,30,-1,-1)
+guictrlsetcursor(-1,4)
+GUICtrlCreateButton("Button 2",40,140,100,30,-1,-1)
+GUICtrlSetCursor (-1, 10)
+GUICtrlCreateButton("Button 3",40,180,100,30,-1,-1)
+GUISwitch($Testform,_GUICtrlTab_SetCurFocus($tab,1)&GUICtrlRead ($tab, 1))
+$progress3 = GUICtrlCreateProgress(132,244,250,20,-1,-1)
+GUICtrlSetData(-1,30)
+GUISwitch($Testform,_GUICtrlTab_SetCurFocus($tab,0)&GUICtrlRead ($tab, 1))
+$date324 = GUICtrlCreateMonthCal("2011/07/22",164,100,201,164,-1,512)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlCreateTabItem("")
+GUICtrlCreateRadio("Radiobutton 2",410,120,150,20,-1,-1)
+GUICtrlCreateRadio("Radiobutton 1",410,100,150,20,-1,-1)
+$updown400 = GUICtrlCreateInput("0",410,180,156,20, -1,512)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+$updown400_Updown = GUICtrlCreateUpdown(-1,-1)
+$combo130 = GUICtrlCreateCombo("",410,220,367,21,-1,-1)
+GUICtrlSetData(-1,"Text1|Text2")
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+$progress_slider = GUICtrlCreateSlider(30,291,540,31,-1,-1)
+GUICtrlSetOnEvent(-1,"_Move_Slider")
+$progressbar = GUICtrlCreateProgress(40,352,522,16,-1,-1)
+GUISwitch($Testform,_GUICtrlTab_SetCurFocus($tab,1)&GUICtrlRead ($tab, 1))
+$button748 = GUICtrlCreateButton("Button",30,240,100,30,-1,-1)
+GUICtrlCreateTabItem("")
+$date945 = GUICtrlCreateDate("Freitag, 02. September 2011",40,380,186,21,-1,-1)
+GUICtrlSetFont(-1,8,400,0,"MS Sans Serif")
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+$edit765 = GUICtrlCreateEdit("Mein Text",240,380,332,120,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+$checkbox492 = GUICtrlCreateCheckbox("Mein Text",40,410,150,20,-1,-1)
+GUICtrlSetFont(-1,8,400,0,"MS Sans Serif")
+$checkbox321 = GUICtrlCreateCheckbox("Mein Text",40,430,150,20,-1,-1)
+GUICtrlSetState(-1,$GUI_CHECKED)
+GUICtrlSetFont(-1,8,400,4,"MS Sans Serif")
+$checkbox485 = GUICtrlCreateCheckbox("Mein Text",40,450,150,20,-1,-1)
+GUICtrlSetState(-1,$GUI_CHECKED)
+GUICtrlSetFont(-1,8,400,0,"MS Sans Serif")
+$checkbox252 = GUICtrlCreateCheckbox("Mein Text",40,470,150,20,-1,-1)
+GUICtrlSetFont(-1,8,400,8,"MS Sans Serif")
+$progress_text = GUICtrlCreateLabel("Move the slider above me! (0 %)",40,329,520,14,$SS_CENTER,-1)
+GUICtrlSetFont(-1,5,400,0,"MS Sans Serif")
+GUICtrlSetBkColor(-1,"-2")
+$softbt1 = GUICtrlCreateButton("Softbutton (click me)",580,100,197,111,$BS_COMMANDLINK,-1)
+GUICtrlSetOnEvent(-1,"_Softbutton_Click")
+DllCall("user32.dll", "UINT", "SendMessage", "handle", GUICtrlGetHandle($softbt1), "UINT", $BCM_SETNOTE, "ptr*", 0, "wstr", "You can edit this text under extracode in the ISN Form Studio!")
+DllCall("user32.dll", "UINT", "SendMessage", "handle", GUICtrlGetHandle($softbt1), "UINT", $BCM_SETSHIELD, "ptr*", 0, "BOOL",false)
+$ip_control = _GUICtrlIpAddress_Create($Testform,410,250,216,20,-1,512)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUISwitch($Testform,_GUICtrlTab_SetCurFocus($tab,1)&GUICtrlRead ($tab, 1))
+GUICtrlCreatelist("",30,87,353,149,-1,512)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+guictrlsetdata(-1,"Item1|Item2|Edit this text in 'Extracode'")
+GUICtrlCreateTabItem("")
+GUICtrlCreateRadio("Radiobutton 3",410,140,150,20,-1,-1)
+$htreeview = GUICtrlCreateTreeView(580,291,205,209,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUISwitch($Testform,_GUICtrlTab_SetCurFocus($tab,2)&GUICtrlRead ($tab, 1))
+GUICtrlCreateProgress(40,100,314,17,-1,-1)
+GUICtrlCreateTabItem("")
+_GUICtrlTab_SetCurFocus($tab,0)
+
+
+
+#cs
+[tab]
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xFFFFFF
+state=80
+id=$tab
+exstyle=
+pages=3
+type=tab
+x=14
+y=56
+width=372
+height=219
+text=
+style=
+handle=409
+code=
+fontattribute=0
+tooltip=
+tabpage=-1
+order=0
+resize=
+iconindex=
+textmode=text
+[0x00111E8C]
+order=0
+[TABPAGE3]
+page=3
+text=Testpage
+textmode=text
+handle=
+[TABPAGE2]
+page=2
+text=Page 2
+textmode=text
+handle=
+[TABPAGE1]
+page=1
+text=Page 1
+textmode=text
+handle=
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=Form
+breite=796
+hoehe=527
+style=-1
+exstyle=-1
+bgcolour=0xF0F0F0
+bgimage=none
+handle=$Testform
+parent=
+code=
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_code_in_function=false
+gui_code_in_function_name=
+gui_event_close=_Exit
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00091F36]
+id=
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=
+state=80
+style=$BS_CENTER
+exstyle=
+code=
+handle=410
+type=group
+x=400
+y=80
+width=388
+height=198
+text=Centered Title
+tabpage=-1
+fontattribute=0
+tooltip=
+order=2
+iconindex=
+resize=
+textmode=text
+[0x000A1E8A]
+id=label779
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=18
+fontstyle=700
+textcolour=0xFCB92E
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=
+handle=411
+type=label
+x=20
+y=10
+width=426
+height=34
+text=ISN Autoit Studio TESTFORM
+tabpage=-1
+fontattribute=6
+tooltip=
+order=3
+[0x00091F30]
+id=
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=guictrlsetcursor(-1,4)
+handle=412
+type=button
+x=40
+y=100
+width=100
+height=30
+text=Button 1
+tabpage=0
+order=4
+tooltip=
+fontattribute=0
+iconindex=
+resize=
+textmode=text
+[0x00091E86]
+id=
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=GUICtrlSetCursor (-1, 10)
+handle=413
+type=button
+x=40
+y=140
+width=100
+height=30
+text=Button 2
+tabpage=0
+order=5
+tooltip=
+fontattribute=0
+iconindex=
+resize=
+textmode=text
+[0x00091E88]
+id=
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=
+handle=414
+type=button
+x=40
+y=180
+width=100
+height=30
+text=Button 3
+tabpage=0
+order=6
+tooltip=
+fontattribute=0
+iconindex=
+resize=
+textmode=text
+[0x000A1E8E]
+id=progress3
+text=30
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=
+handle=415
+type=progress
+x=132
+y=244
+width=250
+height=20
+tabpage=1
+fontattribute=0
+order=7
+[0x00091F5A]
+id=$date324
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xFFFFFF
+state=80
+style=
+exstyle=512
+code=
+handle=416
+type=calendar
+x=164
+y=100
+width=201
+height=164
+text=2011/07/22
+tabpage=0
+order=8
+locked=0
+resize=
+tooltip=
+fontattribute=0
+iconindex=
+textmode=text
+[0x00071FDA]
+id=
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=
+handle=417
+type=radio
+x=410
+y=120
+width=150
+height=20
+text=Radiobutton 2
+tabpage=-1
+order=9
+tooltip=
+fontattribute=0
+iconindex=
+resize=
+textmode=text
+[0x000322E4]
+id=
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=
+handle=418
+type=radio
+x=410
+y=100
+width=150
+height=20
+text=Radiobutton 1
+tabpage=-1
+order=10
+tooltip=
+fontattribute=0
+iconindex=
+resize=
+textmode=text
+[0x00091FDE]
+id=$updown400
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xFFFFFF
+state=80
+style=
+exstyle=512
+code=
+handle=419
+type=updown
+x=410
+y=180
+width=156
+height=20
+text=0
+tabpage=-1
+fontattribute=0
+order=11
+tooltip=
+iconindex=
+resize=
+textmode=text
+[0x00071FD8]
+id=$combo130
+func=
+text=Text1|Text2
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xFFFFFF
+state=80
+style=
+exstyle=
+code=
+handle=420
+type=combo
+x=410
+y=220
+width=367
+height=21
+tabpage=-1
+fontattribute=0
+order=12
+tooltip=
+iconindex=
+resize=
+textmode=text
+[0x000322E8]
+id=$progress_slider
+text=
+func=_Move_Slider
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=
+handle=421
+type=slider
+x=30
+y=291
+width=540
+height=31
+tabpage=-1
+order=13
+tooltip=
+fontattribute=0
+iconindex=
+resize=
+textmode=text
+locked=0
+[0x000322EA]
+id=$progressbar
+text=
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=
+handle=422
+type=progress
+x=40
+y=352
+width=522
+height=16
+tabpage=-1
+order=14
+locked=0
+resize=
+tooltip=
+fontattribute=0
+iconindex=
+textmode=text
+[0x000322EC]
+id=button748
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=
+handle=423
+type=button
+x=30
+y=240
+width=100
+height=30
+text=Button
+tabpage=1
+fontattribute=0
+order=15
+[0x000322EE]
+id=date945
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xFFFFFF
+state=80
+style=
+exstyle=
+code=
+handle=424
+type=date
+x=40
+y=380
+width=186
+height=21
+text=Freitag, 02. September 2011
+tabpage=-1
+order=16
+textmode=text
+[0x000322F0]
+id=edit765
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xFFFFFF
+state=80
+style=
+exstyle=
+code=
+handle=425
+type=edit
+x=240
+y=380
+width=332
+height=120
+text=Mein Text
+tabpage=-1
+tooltip=
+fontattribute=0
+order=17
+textmode=text
+[0x000322F2]
+id=checkbox492
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=
+handle=426
+type=checkbox
+x=40
+y=410
+width=150
+height=20
+text=Mein Text
+tabpage=-1
+order=18
+textmode=text
+[0x000322F4]
+id=checkbox321
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=$GUI_CHECKED
+style=
+exstyle=
+code=
+handle=427
+type=checkbox
+x=40
+y=430
+width=150
+height=20
+text=Mein Text
+tabpage=-1
+fontattribute=4
+order=19
+textmode=text
+[0x000322F6]
+id=checkbox485
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=$GUI_CHECKED
+style=
+exstyle=
+code=
+handle=428
+type=checkbox
+x=40
+y=450
+width=150
+height=20
+text=Mein Text
+tabpage=-1
+order=20
+textmode=text
+[0x000A22FE]
+id=checkbox252
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=
+handle=429
+type=checkbox
+x=40
+y=470
+width=150
+height=20
+text=Mein Text
+tabpage=-1
+fontattribute=8
+order=21
+textmode=text
+[0x000322F8]
+handle=430
+code=
+type=label
+x=40
+y=329
+width=520
+height=14
+text=Move the slider above me! (0 %)
+state=80
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=5
+fontstyle=400
+id=$progress_text
+func=
+bgimage=
+tabpage=-1
+order=22
+tooltip=
+fontattribute=0
+iconindex=
+resize=
+textmode=text
+locked=0
+[0x000A1E9C]
+handle=431
+code=DllCall("user32.dll", "UINT", "SendMessage", "handle", GUICtrlGetHandle($control_handle), "UINT", $BCM_SETNOTE, "ptr*", 0, "wstr", "You can edit this text under extracode in the ISN Form Studio!")[BREAK]DllCall("user32.dll", "UINT", "SendMessage", "handle", GUICtrlGetHandle($control_handle), "UINT", $BCM_SETSHIELD, "ptr*", 0, "BOOL",false)
+type=softbutton
+x=580
+y=100
+width=197
+height=111
+text=Softbutton (click me)
+state=80
+style=$BS_COMMANDLINK
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$softbt1
+func=_Softbutton_Click
+bgimage=
+tabpage=-1
+order=23
+tooltip=
+iconindex=
+resize=
+textmode=text
+[0x0007202E]
+handle=432
+code=
+type=ip
+x=410
+y=250
+width=216
+height=20
+text=
+state=80
+style=
+exstyle=512
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$ip_control
+func=
+bgimage=
+tabpage=-1
+order=24
+tooltip=
+iconindex=
+resize=
+textmode=text
+locked=0
+[0x0006209C]
+handle=433
+code=guictrlsetdata($control_handle,"Item1|Item2|Edit this text in 'Extracode'")
+type=listbox
+x=30
+y=87
+width=353
+height=149
+text=
+state=80
+style=
+exstyle=512
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=1
+order=25
+[0x000720E4]
+id=
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+code=
+handle=434
+type=radio
+x=410
+y=140
+width=150
+height=20
+text=Radiobutton 3
+tabpage=-1
+fontattribute=0
+order=26
+tooltip=
+iconindex=
+resize=
+textmode=text
+[0x00072092]
+handle=435
+code=
+type=treeview
+x=580
+y=291
+width=205
+height=209
+text=
+state=80
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$htreeview
+func=
+bgimage=
+tabpage=-1
+order=27
+tooltip=
+iconindex=
+resize=
+textmode=text
+locked=0
+[0x00082130]
+handle=436
+code=
+type=progress
+x=40
+y=100
+width=314
+height=17
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=2
+order=28
+[0x002223CC]
+handle=437
+locked=0
+resize=
+code=
+type=menu
+x=760
+y=38
+width=25
+height=25
+text=[0x07CA84A0][MBREAK]handle=$MenuItem626[MBREAK]textmode=text[MBREAK]text=File[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=[MBREAK]childs=0x07CA8FE0[MBREAK][0x07CA8FE0][MBREAK]handle=$MenuItem157[MBREAK]textmode=text[MBREAK]text=Nothing to see here...[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=[MBREAK]childs=-1[MBREAK][0x07CA8458][MBREAK]handle=$MenuItem84[MBREAK]textmode=text[MBREAK]text=Help[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=[MBREAK]childs=0x07CA9A00[MBREAK][0x07CA9A00][MBREAK]handle=$MenuItem227[MBREAK]textmode=text[MBREAK]text=Just an example[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=[MBREAK]childs=-1[MBREAK][root][MBREAK]order=0x07CA9808|0x07CA9EC8[MBREAK][0x07CA89B0][MBREAK]handle=$MenuItem626[MBREAK]textmode=text[MBREAK]text=File[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=[MBREAK]childs=0x07CA8770|0x07CA8A40[MBREAK][0x07CA8770][MBREAK]handle=$MenuItem157[MBREAK]textmode=text[MBREAK]text=Nothing to see here...[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=[MBREAK]childs=-1[MBREAK][0x07CA8A40][MBREAK]handle=$MenuItem615[MBREAK]textmode=text[MBREAK]text=Exit[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=_exit()[MBREAK]childs=-1[MBREAK][0x07CA8218][MBREAK]handle=$MenuItem84[MBREAK]textmode=text[MBREAK]text=Help[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=[MBREAK]childs=0x07CAA420[MBREAK][0x07CAA420][MBREAK]handle=$MenuItem227[MBREAK]textmode=text[MBREAK]text=Just an example[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=[MBREAK]childs=-1[MBREAK][0x07CA9808][MBREAK]handle=$MenuItem626[MBREAK]textmode=text[MBREAK]text=File[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=[MBREAK]childs=0x07CAA228|0x07CAA468[MBREAK][0x07CAA228][MBREAK]handle=$MenuItem157[MBREAK]textmode=text[MBREAK]text=Nothing to see here...[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=[MBREAK]childs=-1[MBREAK][0x07CAA468][MBREAK]handle=$MenuItem615[MBREAK]textmode=text[MBREAK]text=Exit[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=_Exit[MBREAK]childs=-1[MBREAK][0x07CA9EC8][MBREAK]handle=$MenuItem84[MBREAK]textmode=text[MBREAK]text=Help[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=[MBREAK]childs=0x07CAA0C0[MBREAK][0x07CAA0C0][MBREAK]handle=$MenuItem227[MBREAK]textmode=text[MBREAK]text=Just an example[MBREAK]iconmode=0[MBREAK]iconpath=[MBREAK]iconvarible=[MBREAK]iconid=[MBREAK]radio=0[MBREAK]checked=0[MBREAK]func=[MBREAK]childs=-1
+tooltip=
+state=
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=29
+tabpage=-1
+iconindex=
+textmode=text
+#ce
